@@ -12,7 +12,7 @@ class Fotografia(models.Model):
 
     nome = models.CharField(max_length=100, null=False, blank=False)
     legenda = models.CharField(max_length=150, null=False, blank=False)
-    actegoria = models.CharField(max_length=100, choices=OPCOES_CATEGORIA, default='')
+    categoria = models.CharField(max_length=100, choices=OPCOES_CATEGORIA, default='')
     descricao = models.TextField(null=False, blank=False)
     foto = models.CharField(max_length=100, null=False, blank=False)
 
