@@ -350,6 +350,8 @@ table {
 
 .rodape__texto {
     font-size: 1.1rem;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 .tags {
