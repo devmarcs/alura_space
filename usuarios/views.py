@@ -1,11 +1,35 @@
 from django.shortcuts import render, redirect
 from usuarios.forms import LoginForms, CadastroForms
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.contrib import messages, auth
 
 
 def login(request):
     form = LoginForms()
+
+    if request.method == 'POST':
+        form = LoginForms(request.POST)
+
+        if form.is_valid():
+            nome = form["nome_login"].value()
+            senha = form["senha"].value()
+
+        usuario = auth.authenticate(
+            request,
+            username=nome,
+            password=senha
+        )
+        if usuario is not None:
+            aviso = 'Login efetuado com sucesso!'
+            messages.success(request, aviso)
+            auth.login(request, usuario)
+            return redirect('home')
+        else:
+            aviso = 'Login Inválido! Dados incorretos.'
+            messages.error(request,aviso)
+            return redirect('login')
+
+
     return render(request, "usuarios/login.html", {"form": form})
 
 def cadastro(request):

@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from galeria.models import Fotografia
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def index(request):
     fotografias = Fotografia.objects.order_by("-date_fotography").filter(publicada=True)
     return render(request, 'galeria/index.html', {'cards': fotografias})
