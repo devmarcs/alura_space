@@ -6,6 +6,14 @@
 <div class="pagina-inicial">
     <header class="cabecalho">
         <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
+        {% for message in messages %}
+        <div class="container-fluid p-4 m-1 d-flex justify-content-center">
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
         <div class="cabecalho__busca">
             <div class="busca__fundo">
                 <form action="{% url 'busca' %}">
@@ -24,7 +32,7 @@
                 <a href="{% url 'home' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
                 <a href="#"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Mais vistas</a>
                 <a href="#"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Novas</a>
-                <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Surpreenda-me</a>
+                <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Sair</a>
             </nav>
         </section>
         <section class="conteudo">
