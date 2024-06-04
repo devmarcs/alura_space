@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from galeria.models import Fotografia
 from django.contrib.auth.decorators import login_required
 
-@login_required
+
 def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -16,7 +16,7 @@ def imagem(request, foto_id):
     return render(request, 'galeria/imagem.html', {'fotografia': fotografia})
 
 def buscar(request):
-    if request.user.is_authenticated:
+    if  not request.user.is_authenticated:
         return redirect('login')
     
     fotografias = Fotografia.objects.order_by("-date_fotography").filter(publicada=True)
