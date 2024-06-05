@@ -22,6 +22,12 @@
     <main class="principal">
         {% include 'shared/_menu_lateral_index.html' %}
         <section class="conteudo">
+            <div class="container__saudacao">
+                <h2 class="saudacao">{% if user.is_authenticated %}
+                        Bem-vindo, {{ user.username }}!
+                    {% endif %}
+                </h2>
+            </div>
             <section class="banner">
                 <img class="banner__imagem" src="{% static '/assets/imagens/Banner(2).png' %}" alt="banner Alura Space">
                 <h1 class="banner__titulo"> A galeria mais completa de fotos do espaço!</h1>
