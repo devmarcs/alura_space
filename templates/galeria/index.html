@@ -1,4 +1,4 @@
-{% extends 'galeria/base.html' %}
+{% extends 'shared/base.html' %}
 
 {% load static %}
 
@@ -20,17 +20,7 @@
         </div>
     </header>
     <main class="principal">
-        <section class="menu-lateral">
-            <nav class="menu-lateral__navegacao">
-                <a href="{% url 'home' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                <a href="{% url 'cadastro' %}"><img class="cadastro"
-                        src="{% static '/assets/ícones/1x/cadastro.png' %}"> Cadastro</a>
-                <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Login</a>
-                <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}">
-                    Sair</a>
-
-            </nav>
-        </section>
+        {% include 'shared/_menu_lateral_index.html' %}
         <section class="conteudo">
             <section class="banner">
                 <img class="banner__imagem" src="{% static '/assets/imagens/Banner(2).png' %}" alt="banner Alura Space">

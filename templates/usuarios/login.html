@@ -1,4 +1,4 @@
-{% extends 'usuarios/base_usuarios.html' %}
+{% extends 'shared/base_usuarios.html' %}
 {% load static %}
 
 {% block content %}
@@ -7,7 +7,11 @@
     <div class="pagina-inicial">
         <header class="cabecalho">
             <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
+                {% for message in messages %}
+                    {% include 'galeria/partials/_alertas.html' %}
+                {% endfor %}
             <div class="cabecalho__busca">
+                
                 <div class="busca__fundo">
                     <form action="{% url 'busca' %}">
                         <input  class="busca__input" type="text" name="buscar" placeholder="O que você procura?">
@@ -18,14 +22,9 @@
                 </div>
             </div>
         </header>
+        
         <main class="principal">
-            <section class="menu-lateral">
-                <nav class="menu-lateral__navegacao">   
-                    <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Login</a>
-                    <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Cadastrar</a>
-                    <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
-                </nav>
-            </section>
+            {% include 'shared/_menu_lateral_autenticacao.html' %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}

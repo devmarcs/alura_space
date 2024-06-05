@@ -1,4 +1,4 @@
-{% extends 'usuarios/base_usuarios.html' %}
+{% extends 'shared/base_usuarios.html' %}
 {% load static %}
 
 {% block content %}
@@ -20,16 +20,7 @@
             </div>
         </header>
         <main class="principal">
-            <section class="menu-lateral">
-                <nav class="menu-lateral__navegacao">
-                    <a href="{% url 'home' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                    <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}">
-                        Login</a>
-                    <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}">
-                        Cadastrar</a>
-                    <a href="{% url 'logout' %}"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
-                </nav>
-            </section>
+            {% include 'shared/_menu_lateral_autenticacao.html' %}
             <section class="galeria" style="margin-left: 5em">
                 <form action="{% url 'cadastro' %}" method="POST">
                     {% csrf_token %}
