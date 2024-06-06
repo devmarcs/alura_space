@@ -16,7 +16,7 @@
         <main class="principal">
             {% include 'shared/_menu_lateral_autenticacao.html' %}
             <section class="galeria" style="margin-left: 5em">
-                <form action="{% url 'login' %}" method="POST">
+                <form action="{% url 'nova_imagem' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     <div class="row">
@@ -29,7 +29,7 @@
                        {% endfor %}
                     </div>
                     <div>
-                        <button class="btn btn-success col-12" type="submit" style="padding: top 5px;">Login</button>
+                        <button class="btn btn-success col-12" type="submit" style="padding: top 5px;">Cadastrar</button>
                     </div>
                 </form>
             </section>
