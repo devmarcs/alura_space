@@ -48,6 +48,7 @@ def nova_imagem(request):
 
 
 def editar_imagem(request):
+    
     return render(request, 'galeria/editar_imagem.html')
 
 
