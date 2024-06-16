@@ -4,6 +4,13 @@ from apps.galeria.forms import FotografiaForms
 from django.contrib import messages
 
 
+def validation_form(request, form, mensagem):
+    if form.is_valid():
+        form.save()
+        messages.success(request, mensagem) 
+        
+
+
 def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -38,18 +45,23 @@ def nova_imagem(request):
     form = FotografiaForms
     if request.method == "POST":
         form = FotografiaForms(request.POST, request.FILES  )
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Cadastro de fotografia realizado com sucesso') 
-            return redirect('home')
+        validation_form(request, form, "Cadastro de fotografia realizado com sucesso")
+        return redirect("home")
 
 
     return render(request, 'galeria/nova_imagem.html', {'form': form})
 
 
-def editar_imagem(request):
-    
-    return render(request, 'galeria/editar_imagem.html')
+def editar_imagem(request, foto_id):
+    fotografia = Fotografia.objects.get(id=foto_id)
+    form = FotografiaForms(instance=fotografia)
+
+    if request.method == 'POST':
+        form = FotografiaForms(request.POST, request.FILES, instance=fotografia)
+        validation_form(request, form, "Edição de fotografia realizada com sucesso")
+        return redirect("home")
+
+    return render(request, 'galeria/editar_imagem.html', {'form': form, "foto_id": foto_id})
 
 
 def deletar_imagem(request):

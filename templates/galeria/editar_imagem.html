@@ -1,0 +1,42 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<body>
+    <div class="pagina-inicial">
+        <header class="cabecalho">
+            <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
+                {% for message in messages %}
+                    {% include 'galeria/partials/_alertas.html' %}
+                {% endfor %}
+            
+        </header>
+        
+        <main class="principal">
+            {% include 'shared/_menu_lateral_index.html' %}
+            <section class="galeria" style="margin-left: 5em">
+                <form action="{% url 'editar_imagem' foto_id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                       {% for field in form.visible_fields %}
+                            <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
+                                <label style="color: #D9D9D9; margin-bottom: 5px;" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                
+                            </div>
+                       {% endfor %}
+                    </div>
+                    <div>
+                        <button class="btn btn-success col-12" type="submit" style="padding: top 5px;">Editar Imagem</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+{% endblock %}
+
+
+{% include 'galeria/partials/_footer.html' %}
